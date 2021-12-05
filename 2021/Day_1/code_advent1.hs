@@ -11,5 +11,3 @@ count [] = 0
 count [x] = 0
 count (x:y:xs) | x < y = 1 + count (y:xs) 
                | otherwise = count (y:xs) 
-
-
