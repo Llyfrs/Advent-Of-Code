@@ -1,5 +1,8 @@
-import Text.Html (content)
 
+main = do  
+        contents <- readFile "input.txt"
+        let result = dive (lines contents) 0 0
+        putStrLn $ show result
 
 
 dive :: [String] -> Int -> Int -> Int
@@ -11,13 +14,3 @@ dive (line:lines) x y | action == "forward" = dive lines (x+read value) y
                  where 
                    action = (words line)!!0
                    value =  (words line)!!1
-
-
-main = do  
-        contents <- readFile "input.txt"
-        let result = dive (lines contents) 0 0
-        putStrLn $ show result
-
-
-
-

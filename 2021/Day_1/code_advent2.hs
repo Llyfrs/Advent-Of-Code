@@ -1,9 +1,7 @@
 main = do  
         contents <- readFile "input.txt"
-        print . count . map readInt . words $ contents
-
-readInt :: String -> Int
-readInt = read
+        let result = count $ map read (words contents)
+        print result
 
 count :: [Int] -> Int
 count [] = 0
