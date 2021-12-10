@@ -32,9 +32,6 @@ rangeDiagonals x1 y1 x2 y2      | x1 > x2 && y1 > y2 = zip [x2..x1] [y2..y1]
                                 | x1 < x2 && y1 > y2 = zip [x1..x2] [y1,(y1-1)..y2]
                                 | otherwise =          zip [x1..x2] [y1..y2]
 
-duplicates [] y = length y
-duplicates (x:xs) y | x `elem` xs && x`notElem`y = duplicates xs (x:y)
-                    | otherwise = duplicates xs y
 removeNoneDuplicates [] = []
 removeNoneDuplicates [x] = []
 removeNoneDuplicates (x:y:xs) | x == y = x:removeNoneDuplicates (y:xs)
