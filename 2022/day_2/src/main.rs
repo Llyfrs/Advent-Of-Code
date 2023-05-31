@@ -50,7 +50,6 @@ fn main() {
 
     println!("Day 2 part 1: {result1}"); // 10310
     println!("Day 2 part 1: {result2}"); // 14859
-
 }
 
 
