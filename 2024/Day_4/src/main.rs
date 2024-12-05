@@ -13,7 +13,6 @@ fn search_line(line: &Vec<char>) -> i32 {
     }
 
     for i in 0..line.len()-3 {
-
         if line[i] == 'X' && line[i+1] == 'M' && line[i+2] == 'A' && line[i+3] == 'S' {
             count += 1
         }
@@ -90,11 +89,6 @@ fn search_x_mas(grid : &Vec<Vec<char>>) -> i32 {
     }
     count
 }
-
-
-
-
-
 
 fn main() {
     let mut sum = 0;
