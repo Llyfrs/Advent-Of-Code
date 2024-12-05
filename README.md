@@ -6,3 +6,7 @@ I wil be finishing all my solution in 2021 in **Haskell**. Since I learned it re
 
 # 2022 
 This year I will do in **Rust**, since I want to learn it and this is great way to practice it.
+
+# 2024 
+
+Again **Rust** since class I'm participating is offering points for correct solutions.  
