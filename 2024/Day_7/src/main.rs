@@ -65,6 +65,7 @@ impl Test {
 fn main() {
     let tests = load_input();
 
+    let now = std::time::Instant::now();
     let mut sum = 0;
     for mut test in tests {
         test.operators = vec![Operation::Multiply, Operation::Add];
@@ -73,9 +74,12 @@ fn main() {
         }
     }
 
+    println!("Time: {:?}", now.elapsed());
     println!("Part 1: {sum}");
 
     sum = 0;
+
+    let now = std::time::Instant::now();
 
     let tests = load_input();
     for mut test in tests {
@@ -85,6 +89,7 @@ fn main() {
         }
     }
 
+    println!("Time: {:?}", now.elapsed());
     println!("Part 2: {sum}")
 
 }
