@@ -24,6 +24,10 @@ impl Segment {
         self.data.len() as u32 == 0
     }
 
+    fn space_left(&self) -> u32 {
+        self.size - self.data.len() as u32
+    }
+
     fn add(&mut self, data: i32) {
         if !self.is_full() {
             self.data.push(data);
@@ -41,6 +45,18 @@ impl Memory {
             segment.print();
         }
         println!();
+    }
+
+    fn calculate_score(&self) -> u64 {
+        let mut sum : u64 = 0;
+        let mut off = 0;
+        for (i, segment) in self.segments.iter().enumerate() {
+            for (j, value) in segment.data.iter().enumerate() {
+                sum += (off + j) as u64 * (*value as u64)
+            }
+            off += segment.size as usize;
+        }
+        return sum;
     }
 
     fn push(&mut self, data: i32) -> (i32, i32) {
@@ -79,6 +95,34 @@ impl Memory {
         }
 
     }
+
+    fn defragment_fr(&mut self) {
+        let mut i = self.segments.len();
+        while i > 0 {
+            i -= 1;
+
+            if self.segments[i].is_empty() {
+                continue;
+            }
+
+            let segment_size = self.segments[i].size;
+            let mut j = 0;
+
+            while j < i {
+                if self.segments[j].space_left() >= segment_size {
+                    // Move data directly
+                    let data = std::mem::take(&mut self.segments[i].data);
+                    for value in data {
+                        self.segments[j].add(value);
+                    }
+
+                    break; // No need to continue with other `j` values
+                }
+                j += 1;
+            }
+        }
+    }
+
 
 }
 
@@ -129,27 +173,20 @@ fn main() {
 
     let mut memory = load_input();
 
-    //memory.print();
-
-
-
     memory.defragment();
 
-    // memory.print();
 
-    let mut sum : u64 = 0;
-    let mut off = 0;
-    for (i, segment) in memory.segments.iter().enumerate() {
-        for (j, value) in segment.data.iter().enumerate() {
+    println!("Part 1: {}", memory.calculate_score());
 
-            sum += (off + j) as u64 * (*value as u64)
+    let mut memory = load_input();
 
-        }
+    memory.defragment_fr();
 
-        off += segment.data.len()
-    }
+    memory.print();
 
-    println!("Part 1: {sum}")
+    println!("Part 2: {}", memory.calculate_score());
+
+
 
 
 }
